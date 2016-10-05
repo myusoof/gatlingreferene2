@@ -12,8 +12,15 @@ dependencies {
     testCompile group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: '2.2.2'
 }
 
-task gatling(dependsOn: 'compileTestScala') << {
+task runLoadTest(dependsOn: 'compileTestScala') << {
   logger.lifecycle(" ---- Executing all Gatling scenarios from: ${sourceSets.test.output.classesDir} ----")
+    int count = 0
+    sourceSets.test.output.classesDir.eachFileRecurse{ file ->
+        if(file.isFile()){
+            count++
+            logger.lifecycle("Tranformed file ${count.toString()} into ${file.name}")
+        }
+    }
   sourceSets.test.output.classesDir.eachFileRecurse { file ->
     if (file.isFile()) {  
       //Remove the full path, .class and replace / with a .
@@ -26,19 +33,20 @@ task gatling(dependsOn: 'compileTestScala') << {
              // I do not use this so
              main = 'io.gatling.app.Gatling'
              classpath = sourceSets.test.output + sourceSets.test.runtimeClasspath
-          jvmArgs = [
+          args = ['-s',gatlingScenarioClass, '-rf', 'build/reports/gatling']
+         /* jvmArgs = [
                   '-Xmx1024M',
                   '-Xms1024M',
                   '-Xss1m',
                   '-XX:MaxPermSize=256M'
-          ]
+          ]*/
 
-             args  '-sbf', 
+             /*args = [ '-sbf',
                    sourceSets.test.output.classesDir,
                    '-s',
                    gatlingScenarioClass,
                    '-rf',
-                   'build/reports/gatling'
+                   'build/reports/gatling']*/
       }   
     }
   }
