@@ -1,15 +1,15 @@
 apply plugin: 'scala'
+apply plugin: 'idea'
 
 
 repositories {
     mavenCentral()
-    maven {
-      url 'http://repository.excilys.com/content/groups/public'
-    }
 }
 
 dependencies {
-    testCompile 'com.excilys.ebi.gatling.highcharts:gatling-charts-highcharts:1.4.3'
+    testCompile 'org.scala-lang:scala-library:2.11.6'
+    testCompile group: 'io.gatling', name: 'gatling-maven-plugin', version: '2.2.0'
+    testCompile group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: '2.2.2'
 }
 
 task gatling(dependsOn: 'compileTestScala') << {
@@ -24,8 +24,15 @@ task gatling(dependsOn: 'compileTestScala') << {
       logger.debug("Tranformed file ${file} into scenario class ${gatlingScenarioClass}")
       javaexec {
              // I do not use this so
-             main = 'com.excilys.ebi.gatling.app.Gatling'
+             main = 'io.gatling.app.Gatling'
              classpath = sourceSets.test.output + sourceSets.test.runtimeClasspath
+          jvmArgs = [
+                  '-Xmx1024M',
+                  '-Xms1024M',
+                  '-Xss1m',
+                  '-XX:MaxPermSize=256M'
+          ]
+
              args  '-sbf', 
                    sourceSets.test.output.classesDir,
                    '-s',
@@ -35,7 +42,6 @@ task gatling(dependsOn: 'compileTestScala') << {
       }   
     }
   }
-  
   logger.lifecycle(" ---- Done executing all Gatling scenarios ----")
 }
 
