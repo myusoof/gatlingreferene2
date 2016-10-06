@@ -1,6 +1,9 @@
+package webservices
+
 import io.gatling.core.Predef._
 import io.gatling.core.scenario.Simulation
 import io.gatling.http
+
 import scala.concurrent.duration._
 /**
   * Created by yusoof on 5/10/16.

@@ -7,11 +7,17 @@ repositories {
 }
 
 dependencies {
-    testCompile 'org.scala-lang:scala-library:2.11.6'
-    testCompile group: 'io.gatling', name: 'gatling-maven-plugin', version: '2.2.0'
-    testCompile group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: '2.2.2'
+    compile 'org.scala-lang:scala-library:2.11.6'
+/*    testCompile 'org.scala-lang:scala-library:2.11.6'*/
+    compile group: 'io.gatling', name: 'gatling-maven-plugin', version: '2.2.0'
+    compile group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: '2.2.2'
 }
 
+sourceSets {
+    main.scala.srcDirs  = ['src/main/scala']
+    test.scala.srcDirs  = ['src/test/scala']
+
+}
 task runLoadTest(dependsOn: 'compileTestScala') << {
   logger.lifecycle(" ---- Executing all Gatling scenarios from: ${sourceSets.test.output.classesDir} ----")
     int count = 0
