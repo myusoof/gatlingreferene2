@@ -10,7 +10,8 @@ dependencies {
     compile 'org.scala-lang:scala-library:2.11.6'
 /*    testCompile 'org.scala-lang:scala-library:2.11.6'*/
     compile group: 'io.gatling', name: 'gatling-maven-plugin', version: '2.2.0'
-    compile group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: '2.2.2'
+    compile group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: '2.2.0'
+
 }
 
 sourceSets {
