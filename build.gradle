@@ -28,6 +28,8 @@ task runLoadTest(dependsOn: 'compileTestScala') << {
             logger.lifecycle("Tranformed file ${count.toString()} into ${file.name}")
         }
     }
+
+    // -Djsse.enableSNIExtension=false for https
   sourceSets.test.output.classesDir.eachFileRecurse { file ->
     if (file.isFile()) {  
       //Remove the full path, .class and replace / with a .
