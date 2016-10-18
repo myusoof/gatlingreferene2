@@ -12,5 +12,5 @@ import scala.concurrent.duration._
   * Created by yusoof on 5/10/16.
   */
 class TestScenario1 extends Simulation{
-  setUp(GetUsersScenarios.getAllUsersScenarios.inject(rampUsersPerSec(2) to (10) during(5 seconds))).protocols(WebServiceHttpProtocolHelper.httpProtocol).maxDuration(40 seconds)
+  setUp(GetUsersScenarios.feederExample.inject(rampUsersPerSec(2) to (10) during(5 seconds))).protocols(WebServiceHttpProtocolHelper.httpProtocol).maxDuration(10 seconds)
 }
