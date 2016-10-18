@@ -8,4 +8,5 @@ import io.gatling.http.Predef._
   */
 object WebServiceHttpProtocolHelper{
   val httpProtocol = http.baseURL("http://jsonplaceholder.typicode.com/")
+  val internetHeroKuppProtocol = http.baseURL("http://the-internet.herokuapp.com/").disableCaching
 }

@@ -1,7 +1,6 @@
 package webservices.scenarios
 
 import io.gatling.core.session.Session
-import io.gatling.http.Predef._
 import webservices.services.GetAllPostService
 
 import io.gatling.core.Predef._
@@ -15,8 +14,23 @@ object GetUsersScenarios {
     GetAllPostService.getAllUsersService.check(status.is(200)).check(jsonPath("$..[?(@.id==94)].userId").find.saveAs("userId")).resources(GetAllPostService.getPostByUserid)
   )
 
-  val feederExample = scenario("feeder example").feed(csv("username.csv").random).exec(session =>{
+  val feederExample = scenario("feeder example").feed(csv("username.csv").random)
+    .exec(session =>{
       println(session("userid").as[String])
       session
-  }).exec(GetAllPostService.getAllUsersService.check(status.is(200)).check(jsonPath("$..[?(@.id==94)].userId").find.saveAs("userId")))
+      })
+    .exec(GetAllPostService.getAllUsersService.check(status.is(200))
+      .check(jsonPath("$..[?(@.id==94)].userId").find.saveAs("userId")))
+
+  val abTestingScenario = scenario("ab testing site").group("Ab Testing"){
+    exec(GetAllPostService.internetHerokuppsite.check(status.is(200)))
+      .exec(GetAllPostService.abTesting.check(status.is(200)))
+  }
+
+  val basicAuthScenario = scenario("basic auth site").group("Basic Auth"){
+    exec(GetAllPostService.internetHerokuppsite.check(status.is(200)))
+      .exec(GetAllPostService.basicAuth.check(status.is(200)))
+  }
+
+
 }

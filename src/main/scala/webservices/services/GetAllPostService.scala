@@ -10,4 +10,8 @@ import io.gatling.http.Predef._
 object GetAllPostService {
   val getAllUsersService = http("Get All Post").get("posts")
   val getPostByUserid = http("get post by userid").get("/?userId=${userId}")
+
+  val internetHerokuppsite = http("internet site").get("")
+  val abTesting = http("abtest").get("abtest")
+  val basicAuth = http("basic Auth").get("basic_auth").basicAuth("admin", "admin")
 }
