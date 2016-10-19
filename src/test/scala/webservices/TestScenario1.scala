@@ -20,4 +20,6 @@ class TestScenario1 extends Simulation{
   )
     .protocols(WebServiceHttpProtocolHelper.internetHeroKuppProtocol).maxDuration(10 seconds)
 
+/*  setUp(GetUsersScenarios.vbbhomepage.inject(rampUsersPerSec(2) to (10) during(5 seconds))
+  ).protocols(WebServiceHttpProtocolHelper.vbbhttpprotocol).maxDuration(10 seconds)*/
 }

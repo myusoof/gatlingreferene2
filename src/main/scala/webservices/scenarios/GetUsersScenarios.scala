@@ -28,9 +28,12 @@ object GetUsersScenarios {
   }
 
   val basicAuthScenario = scenario("basic auth site").group("Basic Auth"){
-    exec(GetAllPostService.internetHerokuppsite.check(status.is(200)))
+    exec(GetAllPostService.internetHerokuppsite.check(status.is(200)).check(header("set-cookie").saveAs("cookie1")))
+        .exec(session => {println(session("cookie1").as[String])
+          session
+        })
       .exec(GetAllPostService.basicAuth.check(status.is(200)))
   }
 
-
+  val vbbhomepage = scenario("vbb internet application").exec(GetAllPostService.vbb_user_launch.check(status.is(200)))
 }
