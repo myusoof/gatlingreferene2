@@ -17,5 +17,4 @@ class VBBSimulation extends Simulation{
     VbbScenarios.VbbGetHealthDashboardScenario.inject(atOnceUsers(1)),
     VbbScenarios.VbbGetHealthAttributeScenario.inject(atOnceUsers(1))
   ).protocols(WebServiceHttpProtocolHelper.vbbhttpprotocol)
-
 }
