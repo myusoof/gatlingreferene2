@@ -12,9 +12,9 @@ import scala.concurrent.duration._
   * Created by yusoof on 5/10/16.
   */
 class VBBSimulation extends Simulation{
-  setUp(VbbScenarios.VbbGetAllProgramsScenario.inject(atOnceUsers(1)),
-    VbbScenarios.VbbGetRewardsScenario.inject(atOnceUsers(1)),
-    VbbScenarios.VbbGetHealthDashboardScenario.inject(atOnceUsers(1)),
-    VbbScenarios.VbbGetHealthAttributeScenario.inject(atOnceUsers(1))
-  ).protocols(WebServiceHttpProtocolHelper.vbbhttpprotocol)
+  setUp(VbbScenarios.VbbGetAllProgramsScenario.inject(rampUsers(10) over(5 seconds)),
+    VbbScenarios.VbbGetRewardsScenario.inject(rampUsers(10) over(5 seconds)),
+    VbbScenarios.VbbGetHealthDashboardScenario.inject(rampUsers(10) over(5 seconds)),
+    VbbScenarios.VbbGetHealthAttributeScenario.inject(rampUsers(10) over(5 seconds))
+  ).protocols(WebServiceHttpProtocolHelper.vbbhttpprotocol).maxDuration(15 minutes)
 }
