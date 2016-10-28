@@ -7,7 +7,5 @@ import io.gatling.http.Predef._
   * Created by yusoof on 7/10/16.
   */
 object WebServiceHttpProtocolHelper{
-  val httpProtocol = http.baseURL("http://jsonplaceholder.typicode.com/")
-  val internetHeroKuppProtocol = http.baseURL("http://the-internet.herokuapp.com/").disableCaching
-  val vbbhttpprotocol = http.baseURL("http://abn-vbb-fdn-d03.dev.trizetto.com:90/VBB_MEMBER53/").disableCaching
+  val vbbhttpprotocol = http.baseURL("http://abn-vbb-fdn-d03.dev.trizetto.com:90/").disableCaching.ntlmAuth("mohmedyusoof.as", "Sep@2017", "corp","")
 }
